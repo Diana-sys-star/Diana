@@ -1,0 +1,47 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class Graph {
+private:
+    int n;  // количество вершин
+    vector<vector<int>> adjMatrix;  // матрица смежности
+
+public:
+    Graph(int vertices) {
+        n = vertices;
+        adjMatrix.resize(n, vector<int>(n, 0));
+    }
+
+    void addEdge(int u, int v) {
+        adjMatrix[u][v] = 1;  // ребро из u в v
+        adjMatrix[v][u] = 1;  // для неориентированного графа
+    }
+
+    void printGraph() {
+        for (int i = 0; i < n; i++) {
+            cout << "Вершина " << i << ": ";
+            for (int j = 0; j < n; j++) {
+                cout << adjMatrix[i][j] << " ";
+            }
+            cout << endl;
+        }
+    }
+};
+
+int main() {
+    Graph g(5);  // создаем граф с 5 вершинами
+
+    g.addEdge(0, 1);
+    g.addEdge(0, 4);
+    g.addEdge(1, 2);
+    g.addEdge(1, 3);
+    g.addEdge(1, 4);
+    g.addEdge(2, 3);
+    g.addEdge(3, 4);
+
+    g.printGraph();
+
+    return 0;
+}
